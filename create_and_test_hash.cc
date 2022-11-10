@@ -23,15 +23,30 @@ void TestFunctionForHashTable(HashTableType &hash_table,
 			      const string &query_filename) {
     hash_table.MakeEmpty();
     //..Insert your own code
-    ofstream words_file, query_file;
-    words_file.open("words.txt")
+    int number_of_elements{0};
+    int collisions;
+    float vg_collisions;
+    fstream words_file, query_file;
+
+    words_file.open("words.txt");
+    string word;
     if(words_file.is_open()){
-        while(words_file.getline(line)){
-            hash_table.Insert(line);
+        while(words_file >> word){  
+            hash_table.Insert(word);
+            number_of_elements++;
         }
     }
+    cout << "number_of_elements: " << number_of_elements << endl;
+    cout << "size_of_table: " << array_.size() << endl;
+    cout << "load_factor: " << number_of_elements/array_.size() << endl;
+    cout << "collisions: " << collisions << endl;
+    cout << "avg_collisions" << endl;
+
     words_file.close();
    
+    <word1> Found <probes1>
+    <word2> Not_Found <probes2>
+    <word3> Found <probes3>
 
 }
 

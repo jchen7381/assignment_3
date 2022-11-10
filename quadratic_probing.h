@@ -56,9 +56,9 @@ class HashTable {
 
   bool Insert(const HashedObj & x) {
     // Insert x as active
-    size_t current_pos = FindPos(x);
-    if (IsActive(current_pos))
-      return false;
+    size_t current_pos = FindPos(x);    //finds a position for x
+    if (IsActive(current_pos))          //if there is an item in position 
+      return false;                     //returns false;
     
     array_[current_pos].element_ = x;
     array_[current_pos].info_ = ACTIVE;
@@ -71,8 +71,8 @@ class HashTable {
     
   bool Insert(HashedObj && x) {
     // Insert x as active
-    size_t current_pos = FindPos(x);
-    if (IsActive(current_pos))
+    size_t current_pos = FindPos(x);    //current position = find postion of x , possible after probing
+    if (IsActive(current_pos))          //if current position is taken return false.
       return false;
     
     array_[current_pos] = std::move(x);
@@ -117,14 +117,14 @@ class HashTable {
     size_t offset = 1;
     size_t current_pos = InternalHash(x);
       
-    while (array_[current_pos].info_ != EMPTY &&
+    while (array_[current_pos].info_ != EMPTY &&    //if array index is not empty and element is not the same, probe i^2 
 	   array_[current_pos].element_ != x) {
       current_pos += offset;  // Compute ith probe.
       offset += 2;
-      if (current_pos >= array_.size())
+      if (current_pos >= array_.size())   //restart the index from the beginning
 	current_pos -= array_.size();
     }
-    return current_pos;
+    return current_pos;       //returns the position, changes only if index is not empty
   }
 
   void Rehash() {
