@@ -94,6 +94,12 @@ class HashTable {
     return true;
   }
 
+  size_t size(){
+    return current_size_;
+  }
+
+
+
  private:        
   struct HashEntry {
     HashedObj element_;
@@ -106,7 +112,6 @@ class HashTable {
     :element_{std::move(e)}, info_{ i } {}
   };
     
-
   std::vector<HashEntry> array_;
   size_t current_size_;
 
@@ -148,4 +153,4 @@ class HashTable {
   }
 };
 
-#endif  // QUADRATIC_PROBING_H
+#endif  //QUADRATIC_PROBING_H

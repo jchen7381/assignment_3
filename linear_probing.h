@@ -40,7 +40,7 @@ class HashTableLinear {
  public:
   enum EntryType {ACTIVE, EMPTY, DELETED};
 
-  explicit HashTableLinear(size_t size = 101) : array_(NextPrime(size))
+  explicit HashTableLinear(size_t size = 101) : array_(NextPrimeLinear(size))
     { MakeEmpty(); }
   
   bool Contains(const HashedObj & x) const {
@@ -91,6 +91,10 @@ class HashTableLinear {
 
     array_[current_pos].info_ = DELETED;
     return true;
+  }
+
+  size_t size(){
+    return current_size_;
   }
 
  private:        

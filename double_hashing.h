@@ -41,7 +41,7 @@ class HashTableDouble {
  public:
   enum EntryType {ACTIVE, EMPTY, DELETED};
 
-  explicit HashTableDouble(size_t size = 101) : array_(NextPrime(size))
+  explicit HashTableDouble(size_t size = 101) : array_(NextPrimeDouble(size))
     { MakeEmpty(); }
   
   bool Contains(const HashedObj & x) const {
@@ -94,6 +94,10 @@ class HashTableDouble {
     return true;
   }
 
+  size_t size(){
+    return current_size_;
+  }
+
  private:        
   struct HashEntry {
     HashedObj element_;
@@ -120,7 +124,8 @@ class HashTableDouble {
     while (array_[current_pos].info_ != EMPTY &&
 	   array_[current_pos].element_ != x) {
       current_pos += offset;  // Compute ith probe.
-      offset += 2;
+      // offset += 2;
+      hash2 (x) = R – (x mod R)
       if (current_pos >= array_.size())
 	current_pos -= array_.size();
     }

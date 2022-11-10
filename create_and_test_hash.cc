@@ -6,7 +6,6 @@
 // Uncomment when you implemented linear probing & double hashing
 #include "linear_probing.h"
 #include "double_hashing.h"
-
 #include "quadratic_probing.h"
 
 using namespace std;
@@ -23,30 +22,47 @@ void TestFunctionForHashTable(HashTableType &hash_table,
 			      const string &query_filename) {
     hash_table.MakeEmpty();
     //..Insert your own code
-    int number_of_elements{0};
+    int number_of_elements;
     int collisions;
     float vg_collisions;
+    
     fstream words_file, query_file;
 
     words_file.open("words.txt");
-    string word;
     if(words_file.is_open()){
-        while(words_file >> word){  
+        for(string word; getline(words_file, word);){  
+
             hash_table.Insert(word);
             number_of_elements++;
         }
     }
-    cout << "number_of_elements: " << number_of_elements << endl;
-    cout << "size_of_table: " << array_.size() << endl;
-    cout << "load_factor: " << number_of_elements/array_.size() << endl;
-    cout << "collisions: " << collisions << endl;
-    cout << "avg_collisions" << endl;
 
-    words_file.close();
+    float load_factor = number_of_elements/hash_table.size();
+    int size_of_table = hash_table.size();
+    int avg_collisions = number_of_elements/collisions;
+    
+    cout << "number_of_elements: " << number_of_elements << endl;
+    cout << "size_of_table: " << size_of_table << endl;
+    cout << "load_factor: " << load_factor << endl;
+    cout << "collisions: " << collisions << endl;
+    cout << "avg_collisions" << avg_collisions << endl;
    
-    <word1> Found <probes1>
-    <word2> Not_Found <probes2>
-    <word3> Found <probes3>
+    words_file.close();
+
+    query_file.open("query_words.txt");
+    if(query_file.is_open()){
+        for(string query; getline(query_file, query);){  
+            if(hash_table.Contains(query)){
+                cout << query << " Found " << endl;
+            }
+            else{
+                cout << query << " Not_Found " << endl;
+            }
+        }
+    }
+    //<word1> Found <probes1>
+    //<word2> Not_Found <probes2>
+    //<word3> Found <probes3>
 
 }
 
@@ -66,21 +82,19 @@ int testHashingWrapper(int argument_count, char **argument_list) {
     if (param_flag == "linear") {
       // Uncomment below when you have implemented linear probing.
         HashTableLinear<string> linear_probing_table;
-        TestFunctionForHashTable(linear_probing_table, words_filename,
-      	query_filename);
+        TestFunctionForHashTable(linear_probing_table, words_filename, query_filename);
+
     } else if (param_flag == "quadratic") {
-	HashTable<string> quadratic_probing_table;
-	TestFunctionForHashTable(quadratic_probing_table, words_filename,
-				 query_filename);          
+	    HashTable<string> quadratic_probing_table;
+	    TestFunctionForHashTable(quadratic_probing_table, words_filename, query_filename);    
+          
     } else if (param_flag == "double") {
 	cout << "r_value: " << R << endl;
         // Uncomment below when you have implemented double hashing.
 	    HashTableDouble<string> double_probing_table;
-	    TestFunctionForHashTable(double_probing_table, words_filename,
-		query_filename);
+	    TestFunctionForHashTable(double_probing_table, words_filename, query_filename);
     } else {
-	cout << "Unknown tree type " << param_flag
-	     << " (User should provide linear, quadratic, or double)" << endl;
+	cout << "Unknown tree type " << param_flag << " (User should provide linear, quadratic, or double)" << endl;
     }
     return 0;
 }
