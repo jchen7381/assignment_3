@@ -41,31 +41,28 @@ class HashTable {
  public:
   enum EntryType {ACTIVE, EMPTY, DELETED};
 
-  int get_num_of_element{
-    int number_of_elements = current_size_;
-    return number_of_elements;
-  }
   
-  int get_size_of_table{
-    int size_of_table = array_.size();
-    return size_of_table;
+  int get_num_of_element(){
+    return current_size_;
+  }
+    
+  int get_size_of_table(){
+    return array_.size();
   }
 
-  float get_load_factor{
-    float load_factor = current_size_ / array_.size();
-    return load_factor;
+  float get_load_factor(){
+    return current_size_ / array_.size();
   }
 
-  int get_collisions{
-    return collisions;
+  int get_collisions(){
+    return total_collisions;
   }
 
-  int get_avg_collisions{
-    int collisions / current_size_;
-    return avg_collisions;
+  int get_avg_collisions(){
+    return static_cast<float>(total_collisions) / static_cast<float> (current_size_);
   }
 
-  int get_probes{
+  int get_probes(){
     return probes;
   }
   //probes
@@ -144,6 +141,7 @@ class HashTable {
   std::vector<HashEntry> array_;
   size_t current_size_;
   int total_collisions;
+  int probes{1};
 
   bool IsActive(size_t current_pos) const
   { return array_[current_pos].info_ == ACTIVE; }
@@ -151,21 +149,22 @@ class HashTable {
 
   size_t FindPos(const HashedObj & x) const {
     int collisions{0};
-    int probes{1};
+    int temp_probe{1};
     size_t offset = 1;
     size_t current_pos = InternalHash(x);
     
     while (array_[current_pos].info_ != EMPTY &&    //if array index is not empty and element is not the same, probe i^2 
-	   array_[current_pos].element_ != x) {
-      probes++;
+      array_[current_pos].element_ != x) {
+      temp_probe++;
       collisions++;
       total_collisions += collisions;
-
+      
       current_pos += offset;  // Compute ith probe.
       offset += 2;
       if (current_pos >= array_.size())   //restart the index from the beginning
 	current_pos -= array_.size();
     }
+    probes = temp_probe;
     return current_pos;       //returns the position, changes only if index is not empty
   }
 

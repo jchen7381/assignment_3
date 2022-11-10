@@ -27,8 +27,7 @@ void TestFunctionForHashTable(HashTableType &hash_table,
 
     words_file.open("words.txt");
     if(words_file.is_open()){
-        for(string word; getline(words_file, word);){  
-
+        for(string word; getline(words_file, word);){
             hash_table.Insert(word);
             
         }
@@ -39,7 +38,7 @@ void TestFunctionForHashTable(HashTableType &hash_table,
     cout << "load_factor: " << hash_table.get_load_factor() << endl;
     cout << "collisions: " << hash_table.get_collisions() << endl;
     cout << "avg_collisions" << hash_table.get_avg_collisions() << endl;
-   
+    cout << endl;
     words_file.close();
 
     query_file.open("query_words.txt");

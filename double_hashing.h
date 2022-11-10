@@ -38,40 +38,35 @@ int NextPrimeDouble(size_t n) {
 
 //  Double Hashing implementation.
 template <typename HashedObj>
-class HashTable {
+class HashTableDouble {
  public:
   enum EntryType {ACTIVE, EMPTY, DELETED};
 
-  int get_num_of_element{
-    int number_of_elements = current_size_;
-    return number_of_elements;
+  int get_num_of_element(){
+    return current_size_;
   }
-  
-  int get_size_of_table{
-    int size_of_table = array_.size();
-    return size_of_table;
+    
+  int get_size_of_table(){
+    return array_.size();
   }
 
-  float get_load_factor{
-    float load_factor = current_size_ / array_.size();
-    return load_factor;
+  float get_load_factor(){
+    return current_size_ / array_.size();
   }
 
-  int get_collisions{
-    return collisions;
+  int get_collisions(){
+    return total_collisions;
   }
 
-  int get_avg_collisions{
-    int collisions / current_size_;
-    return avg_collisions;
+  int get_avg_collisions(){
+    return static_cast<float>(total_collisions) / static_cast<float> (current_size_);
   }
 
-  int get_probes{
+  int get_probes(){
     return probes;
   }
-  //probes
 
-  explicit HashTable(size_t size = 101) : array_(NextPrime(size))
+  explicit HashTableDouble(size_t size = 101) : array_(NextPrimeDouble(size))
     { MakeEmpty(); }
   
   bool Contains(const HashedObj & x) const {
