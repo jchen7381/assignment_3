@@ -134,7 +134,7 @@ class HashTableLinear {
     std::vector<HashEntry> old_array = array_;
 
     // Create new double-sized, empty table.
-    array_.resize(NextPrime(2 * old_array.size()));
+    array_.resize(NextPrimeLinear(2 * old_array.size()));
     for (auto & entry : array_)
       entry.info_ = EMPTY;
     

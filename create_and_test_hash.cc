@@ -21,10 +21,10 @@ void TestFunctionForHashTable(HashTableType &hash_table,
 			      const string &words_filename,
 			      const string &query_filename) {
     hash_table.MakeEmpty();
+    
     //..Insert your own code
     int number_of_elements;
     int collisions;
-    float vg_collisions;
     
     fstream words_file, query_file;
 
@@ -60,9 +60,9 @@ void TestFunctionForHashTable(HashTableType &hash_table,
             }
         }
     }
-    //<word1> Found <probes1>
-    //<word2> Not_Found <probes2>
-    //<word3> Found <probes3>
+    // <word1> Found <probes1>
+    // <word2> Not_Found <probes2>
+    // <word3> Found <probes3>
 
 }
 

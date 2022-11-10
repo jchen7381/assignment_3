@@ -125,7 +125,7 @@ class HashTableDouble {
 	   array_[current_pos].element_ != x) {
       current_pos += offset;  // Compute ith probe.
       // offset += 2;
-      hash2 (x) = R – (x mod R)
+      // hash2 (x) = R – (x mod R)
       if (current_pos >= array_.size())
 	current_pos -= array_.size();
     }
@@ -136,7 +136,7 @@ class HashTableDouble {
     std::vector<HashEntry> old_array = array_;
 
     // Create new double-sized, empty table.
-    array_.resize(NextPrime(2 * old_array.size()));
+    array_.resize(NextPrimeDouble(2 * old_array.size()));
     for (auto & entry : array_)
       entry.info_ = EMPTY;
     
