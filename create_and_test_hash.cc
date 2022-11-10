@@ -23,7 +23,7 @@ void TestFunctionForHashTable(HashTableType &hash_table,
     hash_table.MakeEmpty();
     
     //..Insert your own code
-    int number_of_elements;
+    int number_of_elements{0};
     int collisions;
     
     fstream words_file, query_file;
@@ -83,11 +83,13 @@ int testHashingWrapper(int argument_count, char **argument_list) {
       // Uncomment below when you have implemented linear probing.
         HashTableLinear<string> linear_probing_table;
         TestFunctionForHashTable(linear_probing_table, words_filename, query_filename);
+        cout << "test1" << endl;
 
     } else if (param_flag == "quadratic") {
 	    HashTable<string> quadratic_probing_table;
-	    TestFunctionForHashTable(quadratic_probing_table, words_filename, query_filename);    
+	    TestFunctionForHashTable(quadratic_probing_table, words_filename, query_filename);  
           
+        cout << "test2" << endl;
     } else if (param_flag == "double") {
 	cout << "r_value: " << R << endl;
         // Uncomment below when you have implemented double hashing.
