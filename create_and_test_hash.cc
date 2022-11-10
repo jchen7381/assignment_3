@@ -22,10 +22,7 @@ void TestFunctionForHashTable(HashTableType &hash_table,
 			      const string &query_filename) {
     hash_table.MakeEmpty();
     
-    //..Insert your own code
-    int number_of_elements{0};
-    int collisions;
-    
+    //..Insert your own code    
     fstream words_file, query_file;
 
     words_file.open("words.txt");
@@ -33,19 +30,15 @@ void TestFunctionForHashTable(HashTableType &hash_table,
         for(string word; getline(words_file, word);){  
 
             hash_table.Insert(word);
-            number_of_elements++;
+            
         }
     }
-
-    float load_factor = number_of_elements/hash_table.size();
-    int size_of_table = hash_table.size();
-    int avg_collisions = number_of_elements/collisions;
     
-    cout << "number_of_elements: " << number_of_elements << endl;
-    cout << "size_of_table: " << size_of_table << endl;
-    cout << "load_factor: " << load_factor << endl;
-    cout << "collisions: " << collisions << endl;
-    cout << "avg_collisions" << avg_collisions << endl;
+    cout << "number_of_elements: " << hash_table.get_number_of_elements() << endl;
+    cout << "size_of_table: " << hash_table.get_size_of_table() << endl;
+    cout << "load_factor: " << hash_table.get_load_factor() << endl;
+    cout << "collisions: " << hash_table.get_collisions() << endl;
+    cout << "avg_collisions" << hash_table.get_avg_collisions() << endl;
    
     words_file.close();
 
@@ -53,17 +46,13 @@ void TestFunctionForHashTable(HashTableType &hash_table,
     if(query_file.is_open()){
         for(string query; getline(query_file, query);){  
             if(hash_table.Contains(query)){
-                cout << query << " Found " << endl;
+                cout << query << " Found " << hash_table.get_probes() << endl;
             }
             else{
-                cout << query << " Not_Found " << endl;
+                cout << query << " Not_Found " << hash_table.get_probes() << endl;
             }
         }
     }
-    // <word1> Found <probes1>
-    // <word2> Not_Found <probes2>
-    // <word3> Found <probes3>
-
 }
 
 // @argument_count: argc as provided in main
@@ -83,13 +72,13 @@ int testHashingWrapper(int argument_count, char **argument_list) {
       // Uncomment below when you have implemented linear probing.
         HashTableLinear<string> linear_probing_table;
         TestFunctionForHashTable(linear_probing_table, words_filename, query_filename);
-        cout << "test1" << endl;
+      
 
     } else if (param_flag == "quadratic") {
 	    HashTable<string> quadratic_probing_table;
 	    TestFunctionForHashTable(quadratic_probing_table, words_filename, query_filename);  
-          
-        cout << "test2" << endl;
+
+       
     } else if (param_flag == "double") {
 	cout << "r_value: " << R << endl;
         // Uncomment below when you have implemented double hashing.
