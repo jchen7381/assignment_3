@@ -61,6 +61,8 @@ void SpellChecker(const HashTableDouble<string>& dictionary,
             }
         }
     }
+    document.close();
+    cout << endl;
 
 }
 
