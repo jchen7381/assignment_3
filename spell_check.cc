@@ -80,6 +80,7 @@ void SpellChecker(const HashTableDouble<string>& dictionary,
                             i++;
                         }
                     }
+                    cout << endl;
                 }
             }
         }
