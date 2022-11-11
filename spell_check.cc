@@ -51,10 +51,6 @@ void SpellChecker(const HashTableDouble<string>& dictionary,
                     if(isupper(word[i])){
                         word[i] = tolower(word[i]);
                     }
-                    else if(ispunct(word[i])){
-                        word.erase(i--,1);
-                        len = word.size();
-                    }
                 }
                 if(dictionary.Contains(word)){
                     cout << word << " is CORRECT" << endl;
