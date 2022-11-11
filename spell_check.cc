@@ -52,10 +52,10 @@ void SpellChecker(const HashTableDouble<string>& dictionary,
                         word[i] = tolower(word[i]);
                     }
                     else if(word[i] == (',')){
-                        word.erase(i);
+                        word.erase(i,1);
                     }
                     else if(word[i] == ('.')){
-                        word.erase(i);
+                        word.erase(i,1);
                     }
                 }
                 if(dictionary.Contains(word)){
@@ -66,7 +66,14 @@ void SpellChecker(const HashTableDouble<string>& dictionary,
                     //CASE A
                     
                     //CASE B
-                    
+                    string case_b_word = word;
+                    for(unsigned int i = 0; i <= word.size(); ++i){
+                        case_b_word.erase(i,1);
+                        if(dictionary.Contains(case_b_word)){
+                            cout << "** " << word << " -> " << case_b_word << " ** case B" << endl;
+                        }
+                        case_b_word = word;
+                    }
                     //CASE C
                     string scrambled_word = word;
                     string unscrambled_word = scrambled_word;
@@ -80,7 +87,6 @@ void SpellChecker(const HashTableDouble<string>& dictionary,
                             i++;
                         }
                     }
-                    cout << endl;
                 }
             }
         }
