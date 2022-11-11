@@ -51,7 +51,7 @@ class HashTableDouble {
   }
 
   float get_load_factor(){
-    return current_size_ / array_.size();
+    return static_cast<float>(current_size_) / static_cast<float>(array_.size());
   }
 
   int get_collisions(){
@@ -141,15 +141,15 @@ class HashTableDouble {
   size_t current_size_;
   mutable int collisions{0};
   mutable int probes{1};
-
+  size_t R = 89;
   bool IsActive(size_t current_pos) const
   { return array_[current_pos].info_ == ACTIVE; }
 
 
   size_t FindPos(const HashedObj & x) const {
-  
+    static std::hash<HashedObj> k;
     int temp_probes{1};
-    size_t offset = 1;
+    size_t offset = temp_probes*(R-(k(x))% R);
     size_t current_pos = InternalHash(x);
     
     while (array_[current_pos].info_ != EMPTY &&
@@ -158,7 +158,8 @@ class HashTableDouble {
       collisions++;
       
       current_pos += offset;  // Compute ith probe.
-      offset += 2;
+      //offset += 2;
+      
       if (current_pos >= array_.size())   //restart the index from the beginning
 	current_pos -= array_.size();
     }

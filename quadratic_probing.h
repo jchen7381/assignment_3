@@ -149,7 +149,6 @@ class HashTable {
 
   size_t FindPos(const HashedObj & x) const {
     int temp_probe{1};
-    
     size_t offset = 1;
     size_t current_pos = InternalHash(x);
     
