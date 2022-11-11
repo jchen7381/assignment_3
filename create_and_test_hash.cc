@@ -25,7 +25,7 @@ void TestFunctionForHashTable(HashTableType &hash_table,
     //..Insert your own code    
     fstream words_file, query_file;
 
-    words_file.open("words.txt");
+    words_file.open(words_filename);
     if(words_file.is_open()){
         for(string word; getline(words_file, word);){
             hash_table.Insert(word);
@@ -43,7 +43,7 @@ void TestFunctionForHashTable(HashTableType &hash_table,
     
     cout << endl;
 
-    query_file.open("query_words.txt");
+    query_file.open(query_filename);
     if(query_file.is_open()){
         for(string query; getline(query_file, query);){  
             if(hash_table.Contains(query)){

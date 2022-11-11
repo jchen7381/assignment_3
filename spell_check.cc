@@ -22,7 +22,7 @@ HashTableDouble<string> MakeDictionary(const string &dictionary_file) {
     //..Insert your own code
     fstream dictionary;
 
-    dictionary.open("wordsEN.txt");
+    dictionary.open(dictionary_file);
     if(dictionary.is_open()){
         for(string word; getline(dictionary, word);){
             dictionary_hash.Insert(word);
@@ -39,19 +39,23 @@ void SpellChecker(const HashTableDouble<string>& dictionary,
 		  const string &document_file) {
     
     fstream document;
-    document.open("document1.txt");
+    document.open(document_file);
    
     if(document.is_open()){
         for(string line_of_sentence; getline(document, line_of_sentence);){
-            std::stringstream ss(line_of_sentence);
+            stringstream ss(line_of_sentence);
             string word;
-            while(getline(ss, word, (' '))){
-                for(unsigned int i = 0; i <= word.size(); i++){
-                    if(ispunct(word[i])){
+            while(ss >> word){
+               
+                for(int i = 0, len = word.size(); i < len; i++){
+                    if(isupper(word[i])){
+                        word[i] = tolower(word[i]);
+                    }
+                    else if(ispunct(word[i])){
                         word.erase(i--,1);
+                        len = word.size();
                     }
                 }
-                
                 if(dictionary.Contains(word)){
                     cout << word << " is CORRECT" << endl;
                 }
@@ -60,10 +64,10 @@ void SpellChecker(const HashTableDouble<string>& dictionary,
                 }
             }
         }
+        
+        document.close();
+        cout << endl;
     }
-    document.close();
-    cout << endl;
-
 }
 
 // @argument_count: same as argc in main
