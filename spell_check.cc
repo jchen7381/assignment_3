@@ -46,8 +46,8 @@ void SpellChecker(const HashTableDouble<string>& dictionary,
             stringstream ss(line_of_sentence);
             string word;
             while(ss >> word){
-               
-                for(int i = 0, len = word.size(); i < len; i++){
+            
+                for(unsigned int i = 0, len = word.size(); i < len; i++){
                     if(isupper(word[i])){
                         word[i] = tolower(word[i]);
                     }
@@ -64,9 +64,7 @@ void SpellChecker(const HashTableDouble<string>& dictionary,
                 }
             }
         }
-        
         document.close();
-        cout << endl;
     }
 }
 
