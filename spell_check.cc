@@ -54,6 +54,9 @@ void SpellChecker(const HashTableDouble<string>& dictionary,
                     else if(word[i] == (',')){
                         word.erase(i);
                     }
+                    else if(word[i] == ('.')){
+                        word.erase(i);
+                    }
                 }
                 if(dictionary.Contains(word)){
                     cout << word << " is CORRECT" << endl;
