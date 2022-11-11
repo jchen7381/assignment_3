@@ -66,11 +66,12 @@ void SpellChecker(const HashTableDouble<string>& dictionary,
                     //CASE A
                     //CASE B
                     //CASE C
+                    string scrambled_word = word;
                     for(unsigned int i = 1; i <= word.size(); i++){
                         for(unsigned int j = i + 1 ; j <= word.size(); j++){
                             swap(word[i],word[j]);
                             if(dictionary.Contains(word)){
-                                cout << "** " << word << " -> " << word << " ** case C" << endl;
+                                cout << "** " << scrambled_word << " -> " << word << " ** case C" << endl;
                             }
                             else{
                                 swap(word[i],word[j]);
