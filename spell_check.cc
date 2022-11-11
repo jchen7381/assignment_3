@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <sstream>
 
 // You can change to quadratic probing if you
 // haven't implemented double hashing.
@@ -36,6 +37,30 @@ HashTableDouble<string> MakeDictionary(const string &dictionary_file) {
 // misspelled and prints out possible corrections
 void SpellChecker(const HashTableDouble<string>& dictionary,
 		  const string &document_file) {
+    
+    fstream document;
+    document.open("document1.txt");
+   
+    if(document.is_open()){
+        for(string line_of_sentence; getline(document, line_of_sentence);){
+            std::stringstream ss(line_of_sentence);
+            string word;
+            while(getline(ss, word, (' '))){
+                for(unsigned int i = 0; i <= word.size(); i++){
+                    if(ispunct(word[i])){
+                        word.erase(i--,1);
+                    }
+                }
+                
+                if(dictionary.Contains(word)){
+                    cout << word << " is CORRECT" << endl;
+                }
+                else{
+                    cout << word << " is INCORRECT" << endl;
+                }
+            }
+        }
+    }
 
 }
 
