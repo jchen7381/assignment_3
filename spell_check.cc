@@ -17,6 +17,18 @@ using namespace std;
 HashTableDouble<string> MakeDictionary(const string &dictionary_file) {
   HashTableDouble<string> dictionary_hash;
   // Fill dictionary_hash.
+    dictionary_hash.MakeEmpty();
+    //..Insert your own code
+    fstream dictionary;
+
+    dictionary.open("wordsEN.txt");
+    if(dictionary.is_open()){
+        for(string word; getline(dictionary, word);){
+            dictionary_hash.Insert(word);
+            
+        }
+    }
+    
   return dictionary_hash;
 }
 
