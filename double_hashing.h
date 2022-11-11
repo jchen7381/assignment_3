@@ -42,7 +42,7 @@ class HashTableDouble {
  public:
   enum EntryType {ACTIVE, EMPTY, DELETED};
 
-  int get_num_of_element(){
+  int get_num_of_elements(){
     return current_size_;
   }
     
@@ -55,11 +55,11 @@ class HashTableDouble {
   }
 
   int get_collisions(){
-    return total_collisions;
+    return collisions;
   }
 
   int get_avg_collisions(){
-    return static_cast<float>(total_collisions) / static_cast<float> (current_size_);
+    return static_cast<float>(collisions) / static_cast<float> (current_size_);
   }
 
   int get_probes(){
@@ -139,29 +139,30 @@ class HashTableDouble {
     
   std::vector<HashEntry> array_;
   size_t current_size_;
-  int total_collisions;
+  mutable int collisions;
+  mutable int probes{1};
 
   bool IsActive(size_t current_pos) const
   { return array_[current_pos].info_ == ACTIVE; }
 
 
   size_t FindPos(const HashedObj & x) const {
-    int collisions{0};
-    int probes{1};
+  
+    int temp_probes{1};
     size_t offset = 1;
     size_t current_pos = InternalHash(x);
     
-    while (array_[current_pos].info_ != EMPTY &&    //if array index is not empty and element is not the same, probe i^2 
-	   array_[current_pos].element_ != x) {
-      probes++;
+    while (array_[current_pos].info_ != EMPTY &&
+           array_[current_pos].element_ != x) {
+      temp_probes++;
       collisions++;
-      total_collisions += collisions;
-
+      
       current_pos += offset;  // Compute ith probe.
       offset += 2;
       if (current_pos >= array_.size())   //restart the index from the beginning
 	current_pos -= array_.size();
     }
+    probes = temp_probes;
     return current_pos;       //returns the position, changes only if index is not empty
   }
 
