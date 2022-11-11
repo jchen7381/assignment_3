@@ -70,7 +70,7 @@ void SpellChecker(const HashTableDouble<string>& dictionary,
                         for(unsigned int j = i + 1 ; j <= word.size(); j++){
                             swap(word[i],word[j]);
                             if(dictionary.Contains(word)){
-                                cout << "** " << word << " -> " << word << "** case C" << endl;
+                                cout << "** " << word << " -> " << word << " ** case C" << endl;
                             }
                             else{
                                 swap(word[i],word[j]);
