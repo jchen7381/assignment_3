@@ -47,13 +47,12 @@ void SpellChecker(const HashTableDouble<string>& dictionary,
             string word;
             while(ss >> word){
             
-                for(unsigned int i = 0, len = word.size(); i < len; i++){
+                for(unsigned int i = 0; i < word.size(); i++){
                     if(isupper(word[i])){
                         word[i] = tolower(word[i]);
                     }
-                    else if(ispunct(word[i])){
-                        word.erase(i--,1);
-                        len = word.size();
+                    else if(word[i] == (',')){
+                        word.erase(i);
                     }
                 }
                 if(dictionary.Contains(word)){
