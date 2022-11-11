@@ -75,17 +75,13 @@ void SpellChecker(const HashTableDouble<string>& dictionary,
                         case_b_word = word;
                     }
                     //CASE C
-                    string scrambled_word = word;
-                    string unscrambled_word = scrambled_word;
-                    for(unsigned int i = 1; i <= unscrambled_word.size(); ++i){
-                        swap(unscrambled_word[i],unscrambled_word[i+1]);
-                        if(dictionary.Contains(unscrambled_word)){
-                            cout << "** " << scrambled_word << " -> " << unscrambled_word << " ** case C" << endl;
+                    string case_c_word = word;
+                    for(unsigned int i = 1; i <= word.size(); ++i){
+                        swap(case_c_word[i],case_c_word[i+1]);
+                        if(dictionary.Contains(case_c_word)){
+                            cout << "** " << word << " -> " << case_c_word << " ** case C" << endl;
                         }
-                        else{
-                            swap(unscrambled_word[i],unscrambled_word[i+1]);
-                            i++;
-                        }
+                        case_c_word = word;
                     }
                 }
             }
