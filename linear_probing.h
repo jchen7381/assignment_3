@@ -137,7 +137,7 @@ class HashTableLinear {
     
   std::vector<HashEntry> array_;
   size_t current_size_;
-mutable int collisions{0};
+  mutable int collisions{0};
   mutable int probes{1};
 
   bool IsActive(size_t current_pos) const
