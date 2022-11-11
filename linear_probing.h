@@ -48,14 +48,14 @@ class HashTableLinear {
   }
 
   float get_load_factor(){
-    return current_size_ / array_.size();
+    return static_cast<float>(current_size_) / static_cast<float> (array_.size());
   }
 
   int get_collisions(){
     return collisions;
   }
 
-  int get_avg_collisions(){
+  float get_avg_collisions(){
     return static_cast<float>(collisions) / static_cast<float> (current_size_);
   }
 
@@ -137,7 +137,7 @@ class HashTableLinear {
     
   std::vector<HashEntry> array_;
   size_t current_size_;
-  mutable int collisions;
+  mutable int collisions{0};
   mutable int probes{1};
 
   bool IsActive(size_t current_pos) const

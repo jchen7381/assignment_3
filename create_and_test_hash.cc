@@ -37,7 +37,7 @@ void TestFunctionForHashTable(HashTableType &hash_table,
     cout << "size_of_table: " << hash_table.get_size_of_table() << endl;
     cout << "load_factor: " << hash_table.get_load_factor() << endl;
     cout << "collisions: " << hash_table.get_collisions() << endl;
-    cout << "avg_collisions" << hash_table.get_avg_collisions() << endl;
+    cout << "avg_collisions: " << hash_table.get_avg_collisions() << endl;
     
     words_file.close();
     
