@@ -23,7 +23,7 @@ HashTableDouble<string> MakeDictionary(const string &dictionary_file) {
     fstream dictionary;
 
     dictionary.open(dictionary_file);
-    if(dictionary.is_open()){
+    if(dictionary.is_open()){                       //creating a hash table for dictionary
         for(string word; getline(dictionary, word);){
             dictionary_hash.Insert(word);
             
@@ -48,7 +48,7 @@ void SpellChecker(const HashTableDouble<string>& dictionary,
             while(ss >> word){              //converting each line into words
                     
                 for(unsigned int i = 0; i < word.size(); i++){
-                    if(isupper(word[i])){                       //parsing base on space, comma, and period
+                    if(isupper(word[i])){                       //parsing line base on space, comma, and period
                         word[i] = tolower(word[i]);
                     }
                     else if(word[i] == (',')){
@@ -58,7 +58,7 @@ void SpellChecker(const HashTableDouble<string>& dictionary,
                         word.erase(i,1);
                     }
                 }
-                if(dictionary.Contains(word)){
+                if(dictionary.Contains(word)){                        //if the word is found in the dictionary cout "CORRECT"
                     cout << word << " is CORRECT" << endl;
                 }
                 else{
@@ -69,7 +69,7 @@ void SpellChecker(const HashTableDouble<string>& dictionary,
                     for(unsigned int i = 0; i <= word.size(); ++i){
                         for(unsigned int j = 0; j <= alphabet_string.size(); ++j){
                             string s;
-                            stringstream ss;            //converting char into string
+                            stringstream ss;                //converting char into string
                             ss << alphabet_string[j];
                             ss >> s;
                             case_a_word.insert(i,s);        //inserting string into word
