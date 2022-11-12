@@ -77,7 +77,6 @@ void SpellChecker(const HashTableDouble<string>& dictionary,
                                 case_a_word = word;
                             }
                         }
-                        case_a_word = word;
                     }
                     //CASE B
                     string case_b_word = word;
