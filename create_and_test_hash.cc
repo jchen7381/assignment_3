@@ -25,9 +25,9 @@ void TestFunctionForHashTable(HashTableType &hash_table,
     //..Insert your own code    
     fstream words_file, query_file;
 
-    words_file.open(words_filename);
+    words_file.open(words_filename);            //opening file
     if(words_file.is_open()){
-        for(string word; getline(words_file, word);){
+        for(string word; getline(words_file, word);){       //inserting each line into a hash table
             hash_table.Insert(word);
             
         }

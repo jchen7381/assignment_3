@@ -41,7 +41,7 @@ class HashTable {
  public:
   enum EntryType {ACTIVE, EMPTY, DELETED};
 
-  
+  // all the getters: num of element, tablesize, load factor, collisions, avg collision, and # of probes.
   int get_num_of_elements(){
     return current_size_;
   }
@@ -140,22 +140,22 @@ class HashTable {
     
   std::vector<HashEntry> array_;
   size_t current_size_;
-  mutable int collisions{0};
-  mutable int probes{1};
+  mutable int collisions{0};        //collision
+  mutable int probes{1};            //default probe of 1
 
   bool IsActive(size_t current_pos) const
   { return array_[current_pos].info_ == ACTIVE; }
 
 
   size_t FindPos(const HashedObj & x) const {
-    int temp_probe{1};
+    int temp_probe{1};                //temp probe
     size_t offset = 1;
     size_t current_pos = InternalHash(x);
     
     while (array_[current_pos].info_ != EMPTY &&
       array_[current_pos].element_ != x) {
-      temp_probe++;
-      collisions++;
+      temp_probe++;                       //temp probe + 1 every probe
+      collisions++;                       // collision + 1 everytime theres a collision
       
       current_pos += offset;  // Compute ith probe.
       offset += 2;
@@ -163,7 +163,7 @@ class HashTable {
 	current_pos -= array_.size();
     }
     
-    probes = temp_probe;
+    probes = temp_probe;                //set probe to tempprobe
     return current_pos;
   }
 

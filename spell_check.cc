@@ -43,12 +43,12 @@ void SpellChecker(const HashTableDouble<string>& dictionary,
    
     if(document.is_open()){
         for(string line_of_sentence; getline(document, line_of_sentence);){
-            stringstream ss(line_of_sentence);
+            stringstream ss(line_of_sentence);      //reading file line by line
             string word;
-            while(ss >> word){
-            
+            while(ss >> word){              //converting each line into words
+                    
                 for(unsigned int i = 0; i < word.size(); i++){
-                    if(isupper(word[i])){
+                    if(isupper(word[i])){                       //parsing base on space, comma, and period
                         word[i] = tolower(word[i]);
                     }
                     else if(word[i] == (',')){
@@ -69,17 +69,17 @@ void SpellChecker(const HashTableDouble<string>& dictionary,
                     for(unsigned int i = 0; i <= word.size(); ++i){
                         for(unsigned int j = 0; j <= alphabet_string.size(); ++j){
                             string s;
-                            stringstream ss;
+                            stringstream ss;            //converting char into string
                             ss << alphabet_string[j];
                             ss >> s;
-                            case_a_word.insert(i,s);
+                            case_a_word.insert(i,s);        //inserting string into word
                             if(dictionary.Contains(case_a_word)){
                                 cout << "** " << word << " -> " << case_a_word << " ** case A" << endl;
                             }
                             case_a_word = word;
                         }
                     }
-                    //CASE B remmoving one charactor from the word using for loop
+                    //CASE B removing one charactor from the word using for loop
                     string case_b_word = word;
                     for(unsigned int i = 0; i <= word.size(); ++i){
                         case_b_word.erase(i,1);

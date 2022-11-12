@@ -141,7 +141,7 @@ class HashTableDouble {
   size_t current_size_;
   mutable int collisions{0};
   mutable int probes{1};
-  size_t R = 89;
+  size_t R = 89;                          //R value
   bool IsActive(size_t current_pos) const
   { return array_[current_pos].info_ == ACTIVE; }
 
@@ -149,7 +149,7 @@ class HashTableDouble {
   size_t FindPos(const HashedObj & x) const {
     static std::hash<HashedObj> k;
     int temp_probes{1};
-    size_t offset = temp_probes*(R-(k(x))% R);
+    size_t offset = temp_probes*(R-(k(x))% R);    //Double hash x = R-(xmodR)
     size_t current_pos = InternalHash(x);
     
     while (array_[current_pos].info_ != EMPTY &&
@@ -158,7 +158,7 @@ class HashTableDouble {
       collisions++;
       
       current_pos += offset;  // Compute ith probe.
-      //offset += 2;
+  
       
       if (current_pos >= array_.size())   //restart the index from the beginning
 	current_pos -= array_.size();
