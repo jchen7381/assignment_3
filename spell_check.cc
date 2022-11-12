@@ -63,10 +63,10 @@ void SpellChecker(const HashTableDouble<string>& dictionary,
                 }
                 else{
                     cout << word << " is INCORRECT" << endl;
-                    //CASE A
+                    //CASE A adding on char in any possible position
                     string case_a_word = word;
                     string alphabet_string = "abcdefghijklmnopqrstuvwxyz";
-                    for(unsigned int i = 1; i <= word.size(); ++i){
+                    for(unsigned int i = 0; i <= word.size(); ++i){
                         for(unsigned int j = 0; j <= alphabet_string.size(); ++j){
                             string s;
                             stringstream ss;
@@ -76,12 +76,10 @@ void SpellChecker(const HashTableDouble<string>& dictionary,
                             if(dictionary.Contains(case_a_word)){
                                 cout << "** " << word << " -> " << case_a_word << " ** case A" << endl;
                             }
-                            else{
-                                case_a_word = word;
-                            }
+                            case_a_word = word;
                         }
                     }
-                    //CASE B
+                    //CASE B remmoving one charactor from the word using for loop
                     string case_b_word = word;
                     for(unsigned int i = 0; i <= word.size(); ++i){
                         case_b_word.erase(i,1);
@@ -90,7 +88,7 @@ void SpellChecker(const HashTableDouble<string>& dictionary,
                         }
                         case_b_word = word;
                     }
-                    //CASE C
+                    //CASE C swapping adjects characters in the word
                     string case_c_word = word;
                     for(unsigned int i = 1; i <= word.size(); ++i){
                         swap(case_c_word[i],case_c_word[i+1]);
