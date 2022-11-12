@@ -66,9 +66,12 @@ void SpellChecker(const HashTableDouble<string>& dictionary,
                     //CASE A
                     string case_a_word = word;
                     string alphabet_string = "abcdefghijklmnopqrstuvwxyz";
-                    for(unsigned int i = 0; i <= word.size(); ++i){
+                    for(unsigned int i = 1; i <= word.size(); ++i){
                         for(unsigned int j = 0; j <= alphabet_string.size(); ++j){
-                            string s(1, alphabet_string[j]);
+                            string s;
+                            stringstream ss;
+                            ss << alphabet_string[j];
+                            ss >> s;
                             case_a_word.insert(i,s);
                             if(dictionary.Contains(case_a_word)){
                                 cout << "** " << word << " -> " << case_a_word << " ** case A" << endl;
